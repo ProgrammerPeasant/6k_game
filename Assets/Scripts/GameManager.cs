@@ -1,4 +1,3 @@
-// GameManager.cs
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,12 +6,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Находим ResourceBank в сцене
         resourceBank = FindObjectOfType<ResourceBank>();
 
         if (resourceBank != null)
         {
-            // Устанавливаем начальные значения ресурсов
             resourceBank.ChangeResource(GameResource.Humans, 10);
             resourceBank.ChangeResource(GameResource.Food, 5);
             resourceBank.ChangeResource(GameResource.Wood, 5);

@@ -1,7 +1,4 @@
-// ObservableInt.cs
 using System;
-
-// ResourceBank.cs
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,34 +28,31 @@ public class ObservableInt
     }
 }
 
-// ResourceBank.cs
-
 public class ResourceBank : MonoBehaviour
 {
-    // Словарь, где ключ - это ресурс, а значение - это наблюдаемое целочисленное значение
-    private Dictionary<GameResource, ObservableInt> _resources;
+    public Dictionary<GameResource, ObservableInt> resources = new Dictionary<GameResource, ObservableInt>();
+    
 
-    // Инициализация словаря
     private void Awake()
     {
-        // Создаем словарь и инициализируем каждый ресурс с базовым значением 0
-        _resources = new Dictionary<GameResource, ObservableInt>
-        {
-            { GameResource.Humans, new ObservableInt() },
-            { GameResource.Food, new ObservableInt() },
-            { GameResource.Wood, new ObservableInt() },
-            { GameResource.Stone, new ObservableInt() },
-            { GameResource.Gold, new ObservableInt() }
-        };
+        resources.Add(GameResource.Humans, new ObservableInt(0));
+        resources.Add(GameResource.Food, new ObservableInt(0));
+        resources.Add(GameResource.Wood, new ObservableInt(0));
+        resources.Add(GameResource.Stone, new ObservableInt(0));
+        resources.Add(GameResource.Gold, new ObservableInt(0));
+
+        resources.Add(GameResource.HumansProdLvl, new ObservableInt(1));
+        resources.Add(GameResource.FoodProdLvl, new ObservableInt(1));
+        resources.Add(GameResource.WoodProdLvl, new ObservableInt(1));
+        resources.Add(GameResource.StoneProdLvl, new ObservableInt(1));
+        resources.Add(GameResource.GoldProdLvl, new ObservableInt(1));
     }
 
-    // Метод для изменения ресурса
     public void ChangeResource(GameResource resource, int value)
     {
-        // Проверяем, что ресурс существует в словаре
-        if (_resources.ContainsKey(resource))
+        if (resources.ContainsKey(resource))
         {
-            _resources[resource].Value += value;  // Меняем значение ресурса
+            resources[resource].Value += value;
         }
         else
         {
@@ -66,12 +60,11 @@ public class ResourceBank : MonoBehaviour
         }
     }
 
-    // Метод для получения значения ресурса
     public ObservableInt GetResource(GameResource resource)
     {
-        if (_resources.ContainsKey(resource))
+        if (resources.ContainsKey(resource))
         {
-            return _resources[resource];
+            return resources[resource];
         }
         else
         {
@@ -80,4 +73,6 @@ public class ResourceBank : MonoBehaviour
         }
     }
 }
+
+
 
